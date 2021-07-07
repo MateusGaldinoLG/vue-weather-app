@@ -9,6 +9,11 @@
             <div class="feels-like-temp">
                Feels like: {{Math.round(weather.main.feels_like)}}°C
             </div>
+            <div class="temp-variation">
+              <img v-bind:src="`${image_url}${weather.weather[0].icon}.png`" alt="" class="weather-icon">
+              <p class="max-temp">{{weather.main.temp_max.toFixed(1)}}°C</p>
+              <p class="min-temp">{{weather.main.temp_min.toFixed(1)}}°C</p>
+            </div>
         </div>
         
         <div class="weather">{{weather.weather[0].main}}</div>
@@ -17,6 +22,11 @@
 
 <script>
 export default {
+    data(){
+      return{
+        image_url: 'http://openweathermap.org/img/wn/'
+      }
+    },
     props: {
         weather: {
             type: Object,
@@ -78,6 +88,27 @@ export default {
         font-size: 36px;
         padding: 7px 20px;
 
+    }    
+  }
+
+  .temp-variation{
+    padding: 10px 15px;
+    color: #FFF;
+    font-weight: 900;
+    background-color: rgba(255, 255, 255, 0.481);
+    border-radius: 16px;
+
+    .weather-icon{
+      vertical-align: text-bottom;
+    }
+
+    .max-temp{
+      font-size: 33px;
+    }
+
+    .min-temp{
+      font-size: 30px;
+      color: rgb(245, 240, 240);
     }
   }
 
